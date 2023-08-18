@@ -4,9 +4,10 @@ services:
     image: confluentinc/cp-kafka
     container_name: kafka
     hostname: kafka
-#    ports:
-#      - "9092:9092"
-    network_mode: "host"
+    ports:
+      - "9092:9092"
+      - "29093:29093"
+#    network_mode: "host"
     environment:
       KAFKA_NODE_ID: 2
       KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
