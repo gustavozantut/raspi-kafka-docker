@@ -12,7 +12,7 @@ topic_config = {
     "partitions": 1,
     "replication.factor": 1,  # Set the desired replication factor
     "config": {
-        "min.insync.replicas": 1  # Set the desired minimum in-sync replicas
+        "min.insync.replicas": 2  # Set the desired minimum in-sync replicas
     }
 }
 
