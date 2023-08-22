@@ -9,10 +9,10 @@ admin_client = AdminClient({"bootstrap.servers": bootstrap_servers})
 # Define topic configuration
 topic_config = {
     "topic": "sensors_dht11",
-    "partitions": 1,
+    "partitions": 3,
     "replication.factor": 2,  # Set the desired replication factor
     "config": {
-        "min.insync.replicas": 1  # Set the desired minimum in-sync replicas
+        "min.insync.replicas": 2  # Set the desired minimum in-sync replicas
     }
 }
 
