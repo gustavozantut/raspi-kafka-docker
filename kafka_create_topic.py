@@ -28,3 +28,4 @@ new_topic = NewTopic(
 
 # Create the topic
 admin_client.create_topics([new_topic])
+print(admin_client.list_topics().topics)
