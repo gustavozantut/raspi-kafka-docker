@@ -49,7 +49,7 @@ admin_client.create_topics([new_topic])
 
 try:
     # Create Kafka producer
-    producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
+    producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='0')
     print("producer created")
     while True:
         # Read DHT11 sensor data
