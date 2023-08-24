@@ -12,7 +12,7 @@ def consume_kafka_data():
     )
 
     for message in consumer:
-        print(f"Received message: {message.value}")
+        print(f"Received:\n {message.value}")
 
 if __name__ == "__main__":
     consume_kafka_data()
