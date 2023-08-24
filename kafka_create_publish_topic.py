@@ -4,12 +4,12 @@ import datetime
 import time
 from confluent_kafka.admin import AdminClient, NewTopic
 
-dht_pin = 4
+dht_pin = 18
 # Function to read DHT11 sensor data
 def read_dht11_sensor():
     humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
     if (humidity is None) or (temperature is None):
-        print('Failed to read DHT11 sensor data.')
+        print('Failed to read DHT11 sensor data...')
         return None
     return humidity, temperature
 
