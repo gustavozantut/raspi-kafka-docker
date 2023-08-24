@@ -10,8 +10,9 @@ def read_dht11_sensor():
     humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
     return humidity, temperature
 
-while not read_dht11_sensor():
-    print('trying_to_reach_sensor')
+while (humidity is not None) and (temperature is not None):
+    print('Failed to read DHT11 sensor data.')
+    humidity, temperature = read_dht11_sensor()
 
 # Define the broker(s) you want to connect to
 bootstrap_servers = "192.168.0.101:9092,192.168.14.2:9092,192.168.14.2:9093"
