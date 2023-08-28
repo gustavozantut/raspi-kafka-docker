@@ -58,7 +58,7 @@ try:
             payload = f'Temperature: {temperature:.2f}°C, Humidity: {humidity:.2f}%, Timestamp: {datetime.datetime.now()}'
 
             # Publish the payload to the Kafka topic
-            producer.send("sensors_dht11", value=payload.encode('utf-8'))
+            producer.send("sensors_dht11", value=payload.encode('utf-8')).get()
 
             print("Published:\n", payload)
         else:
