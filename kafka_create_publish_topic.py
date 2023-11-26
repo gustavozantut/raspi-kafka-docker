@@ -64,7 +64,7 @@ try:
         else:
             print('Failed to read DHT11 sensor data.')
 
-        time.sleep(0.5)  # Wait for 0.5 seconds before reading the sensor again
+        #time.sleep(0.5)  # Wait for 0.5 seconds before reading the sensor again
 except KeyboardInterrupt:
     pass
 finally:
