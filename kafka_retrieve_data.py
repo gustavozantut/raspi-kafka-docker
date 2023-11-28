@@ -1,7 +1,7 @@
 from kafka import KafkaConsumer
 
 bootstrap_servers = "100.108.104.205:9092,100.108.97.215:9092,100.108.97.215:9093"  # Replace with the IP address of your Kafka broker
-kafka_topic = "sensors_dht11"  # Use the same topic name that you used in the producer script
+kafka_topic = "plate_detector"  # Use the same topic name that you used in the producer script
 
 def consume_kafka_data():
     consumer = KafkaConsumer(
