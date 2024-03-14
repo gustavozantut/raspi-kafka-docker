@@ -4,7 +4,7 @@ import datetime
 import time
 from confluent_kafka.admin import AdminClient, NewTopic
 
-dht_pin = 4
+dht_pin = 18
 # Function to read DHT11 sensor data
 def read_dht11_sensor():
     
