@@ -4,9 +4,11 @@ import datetime
 import time
 from confluent_kafka.admin import AdminClient, NewTopic
 
-dht_pin = 18
+dht_pin = 7
 # Function to read DHT11 sensor data
 def read_dht11_sensor():
+    
+    print('Reaching for sensor.')
     
     humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
     
@@ -16,37 +18,12 @@ def read_dht11_sensor():
     
     return humidity, temperature
 
-print('Reaching for sensor.')
-
 while not read_dht11_sensor():
     
     pass
 
 # Define the broker(s) you want to connect to
-bootstrap_servers = "100.108.104.205:9092,100.108.97.215:9092,100.108.97.215:9093"
-
-# Create an AdminClient instance
-admin_client = AdminClient({"bootstrap.servers": bootstrap_servers})
-# Define topic configuration
-topic_config = {
-    "topic": "sensors_dht11",
-    "partitions": 1,
-    "replication.factor": 3,  # Set the desired replication factor
-    "config": {
-        "min.insync.replicas": 2  # Set the desired minimum in-sync replicas
-    }
-}
-# Create a NewTopic instance
-new_topic = NewTopic(
-    topic_config["topic"],
-    num_partitions=topic_config["partitions"],
-    replication_factor=topic_config["replication.factor"],
-    config={
-        "min.insync.replicas": str(topic_config["config"]["min.insync.replicas"])
-    }
-)
-# Create the topic
-admin_client.create_topics([new_topic])
+bootstrap_servers = "192.168.0.210:9092,192.168.0.101:9092,192.168.14.2:9092"
 
 try:
     
@@ -61,12 +38,17 @@ try:
         
         if (humidity is not None) and (temperature is not None):
             
-            payload = f'Temperature: {temperature:.2f}°C, Humidity: {humidity:.2f}%, Timestamp: {datetime.datetime.now()}'
+            timestamp = datetime.datetime.now()
+            payload = {
+                'Temperature': temperature,
+                'Humidity': humidity,
+                'Timestamp': timestamp
+                }
             
             try:
                 
                 # Publish the payload to the Kafka topic
-                producer.send("sensors_dht11", value=payload.encode('utf-8')).get()
+                producer.send("dht11", value=payload.encode('utf-8')).get()
                 print("Published:\n", payload)
             
             except:
