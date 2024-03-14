@@ -3,7 +3,7 @@ from kafka import KafkaProducer
 import datetime
 import time
 
-dht_pin = 7
+dht_pin = 17
 # Function to read DHT11 sensor data
 def read_dht11_sensor():
     
