@@ -15,6 +15,8 @@ def read_dht11_sensor():
     
     return humidity, temperature
 
+print('Reaching for sensor.')
+
 while not read_dht11_sensor():
     
     print('Reaching for sensor.')
@@ -43,7 +45,7 @@ try:
                 'Humidity': humidity,
                 'Timestamp': timestamp
                 }
-            print(payload)
+            
             try:
                 
                 # Publish the payload to the Kafka topic
