@@ -47,7 +47,7 @@ try:
                 }
             
             try:
-                
+                print(payload)
                 # Publish the payload to the Kafka topic
                 producer.send("dht11", value=payload.encode('utf-8')).get()
                 print("sent")

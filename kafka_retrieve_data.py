@@ -1,18 +1,72 @@
-from kafka import KafkaConsumer
+import Adafruit_DHT
+from kafka import KafkaProducer
+import datetime
+import time
 
-bootstrap_servers = "100.108.104.205:9092,100.108.97.215:9092,100.108.97.215:9093"  # Replace with the IP address of your Kafka broker
-kafka_topic = "plate_detector"  # Use the same topic name that you used in the producer script
+dht_pin = 4
+# Function to read DHT11 sensor data
+def read_dht11_sensor():
+    
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
+    
+    while (humidity is None) or (temperature is None):
+        
+        humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
+    
+    return humidity, temperature
 
-def consume_kafka_data():
-    consumer = KafkaConsumer(
-        kafka_topic,
-        bootstrap_servers=bootstrap_servers,
-        group_id="dht11_consumer_1",
-        value_deserializer=lambda x: x.decode('utf-8')  # Specify the deserializer for the message value
-    )
+print('Reaching for sensor...')
 
-    for message in consumer:
-        print(f"Received:\n {message.value}")
+while not read_dht11_sensor():
+    
+    print('Reaching for sensor...')
+    
+    pass
 
-if __name__ == "__main__":
-    consume_kafka_data()
+# Define the broker(s) you want to connect to
+bootstrap_servers = "192.168.0.210:9092,192.168.0.101:9092,192.168.14.2:9092"
+
+try:
+    
+    # Create Kafka producer
+    producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
+    print("producer created")
+    
+    while True:
+        
+        # Read DHT11 sensor data
+        humidity, temperature = read_dht11_sensor()
+        
+        if (humidity is not None) and (temperature is not None):
+            
+            timestamp = datetime.datetime.now()
+            payload = {
+                'Temperature': temperature,
+                'Humidity': humidity,
+                'Timestamp': timestamp
+                }
+            
+            try:
+                
+                # Publish the payload to the Kafka topic
+                producer.send("dht11", value=payload.encode('utf-8')).get()
+                print("sent")
+                print("Published:\n", payload)
+            
+            except:
+                
+                pass
+        else:
+            
+            print('Failed to read DHT11 sensor data.')
+
+        #time.sleep(0.5)  # Wait for 0.5 seconds before reading the sensor again
+        
+except KeyboardInterrupt:
+    
+    pass
+
+finally:
+    
+    # Close the Kafka producer upon exiting the loop
+    producer.close()
