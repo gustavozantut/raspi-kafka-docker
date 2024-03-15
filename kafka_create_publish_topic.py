@@ -35,8 +35,6 @@ try:
         # Read DHT11 sensor data
         humidity, temperature = read_dht11_sensor()
         
-        print(humidity,temperature)
-        
         if (humidity is not None) and (temperature is not None):
             
             timestamp = datetime.datetime.now()
@@ -45,7 +43,7 @@ try:
                 'Humidity': humidity,
                 'Timestamp': timestamp
                 }
-            
+            print(payload)
             try:
                 
                 # Publish the payload to the Kafka topic
