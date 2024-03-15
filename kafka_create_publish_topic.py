@@ -7,11 +7,7 @@ dht_pin = 4
 # Function to read DHT11 sensor data
 def read_dht11_sensor():
     
-    print('Reaching for sensor.')
-    
     humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
-    
-    print(humidity, temperature)
     
     while (humidity is None) or (temperature is None):
         
@@ -20,6 +16,8 @@ def read_dht11_sensor():
     return humidity, temperature
 
 while not read_dht11_sensor():
+    
+    print('Reaching for sensor.')
     
     pass
 
