@@ -15,11 +15,11 @@ def read_dht11_sensor():
     
     return humidity, temperature
 
-print('Reaching for sensor.')
+print('Reaching for sensor...')
 
 while not read_dht11_sensor():
     
-    print('Reaching for sensor.')
+    print('Reaching for sensor...')
     
     pass
 
@@ -47,7 +47,7 @@ try:
                 }
             
             try:
-                
+                print("trying")
                 # Publish the payload to the Kafka topic
                 producer.send("dht11", value=payload.encode('utf-8')).get()
                 print("Published:\n", payload)
