@@ -47,9 +47,10 @@ try:
                 }
             
             try:
-            
+                
                 # Publish the payload to the Kafka topic
-                print(producer.send("dht11", value=payload.encode('utf-8')).get())
+                producer.send("dht11", value=payload.encode('utf-8')).get()
+                print("sent")
                 print("Published:\n", payload)
             
             except:
