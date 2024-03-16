@@ -46,16 +46,12 @@ try:
                 'Timestamp': timestamp
                 }
             
-            try:
+
                 
-                print('publishing...')
-                # Publish the payload to the Kafka topic
-                producer.send("dht11", value=payload.encode('utf-8')).get()
-                print("Published:\n", payload)
-            
-            except:
-                
-                pass
+            print('publishing...')
+            # Publish the payload to the Kafka topic
+            producer.send("dht11", value=payload.encode('utf-8')).get()
+            print("Published:\n", payload)
         else:
             
             print('Failed to read DHT11 sensor data.')
