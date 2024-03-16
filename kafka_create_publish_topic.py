@@ -2,6 +2,7 @@ import Adafruit_DHT
 from kafka import KafkaProducer
 import datetime
 import time
+import json
 
 dht_pin = 18
 # Function to read DHT11 sensor data
@@ -46,12 +47,16 @@ try:
                 'Timestamp': timestamp
                 }
             
-
+            try:
                 
-            print('publishing...')
-            # Publish the payload to the Kafka topic
-            producer.send("dht11", value=payload.encode('utf-8')).get()
-            print("Published:\n", payload)
+                print('publishing...')
+                # Publish the payload to the Kafka topic
+                producer.send("dht11", value=json.dumps(payload).encode('utf-8')).get()
+                print("Published:\n", payload)
+            
+            except:
+                
+                pass
         else:
             
             print('Failed to read DHT11 sensor data.')
