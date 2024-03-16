@@ -40,7 +40,7 @@ try:
         
         if (humidity is not None) and (temperature is not None):
             
-            timestamp = datetime.datetime.now()
+            timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             payload = {
                 'Temperature': temperature,
                 'Humidity': humidity,
