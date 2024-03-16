@@ -28,7 +28,7 @@ while not read_dht11_sensor():
 bootstrap_servers = "192.168.0.210:9092,192.168.0.101:9092,192.168.14.2:9092"
 
 try:
-    print("create producer")
+    
     # Create Kafka producer
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
     print("producer created")
@@ -48,10 +48,10 @@ try:
                 }
             
             try:
+                
                 print(payload)
                 # Publish the payload to the Kafka topic
                 producer.send("dht11", value=payload.encode('utf-8')).get()
-                print("sent")
                 print("Published:\n", payload)
             
             except:
