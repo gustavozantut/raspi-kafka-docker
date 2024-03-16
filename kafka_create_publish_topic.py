@@ -49,7 +49,6 @@ try:
             
             try:
                 
-                print('publishing...')
                 # Publish the payload to the Kafka topic
                 producer.send("dht11", value=json.dumps(payload).encode('utf-8')).get()
                 print("Published:\n", payload)
