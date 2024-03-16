@@ -6,7 +6,7 @@ from confluent_kafka.admin import AdminClient, NewTopic
 
 dht_pin = 18
 # Define the broker(s) you want to connect to
-bootstrap_servers = "192.168.0.210:9092,192.168.0.101:9092,192.168.14.2:9092"
+bootstrap_servers = "192.168.0.101:9092,192.168.14.2:9092,192.168.0.210:9092"
 
 # Function to read DHT11 sensor data
 def read_dht11_sensor():
