@@ -47,15 +47,15 @@ try:
                 'Timestamp': timestamp
                 }
             
-            try:
+            # try:
                 
-                # Publish the payload to the Kafka topic
-                producer.send("dht11", value=json.dumps(payload).encode('utf-8')).get()
-                print("Published:\n", payload)
+            # Publish the payload to the Kafka topic
+            producer.send("dht11", value=json.dumps(payload).encode('utf-8')).get()
+            print("Published:\n", payload)
             
-            except:
+            # except:
                 
-                pass
+            #     pass
         else:
             
             print('Failed to read DHT11 sensor data.')
