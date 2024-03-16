@@ -47,7 +47,7 @@ def create_kafka_topic():
     # Create the topic
     admin_client.create_topics([new_topic])
 
-create_kafka_topic()
+#create_kafka_topic()
     
 while not read_dht11_sensor():
     
