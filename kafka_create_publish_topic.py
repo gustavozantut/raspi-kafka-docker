@@ -13,7 +13,6 @@ def read_dht11_sensor():
         
         humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.DHT11, dht_pin)
     
-    print(humidity, temperature)
     return humidity, temperature
 
 print('Reaching for sensor...')
@@ -49,9 +48,9 @@ try:
             
             try:
                 
-                #print(payload)
+                print('publishing...')
                 # Publish the payload to the Kafka topic
-                print(producer.send("dht11", value=payload.encode('utf-8')).get())
+                producer.send("dht11", value=payload.encode('utf-8')).get()
                 print("Published:\n", payload)
             
             except:
