@@ -47,21 +47,35 @@ def create_kafka_topic():
     # Create the topic
     admin_client.create_topics([new_topic])
 
-create_kafka_topic()
+print('Creating topic...')
+while not create_kafka_topic():
     
+        pass
+        
+print('Topic created!')
+
+print('Reaching for sensor...')
 while not read_dht11_sensor():
-    
-    print('Reaching for sensor...')
     
     pass
 
 try:
     
-    # Create Kafka producer
+    print('Creating topic...')
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
+    while not producer():
+
+            producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
+            pass
+            
+    print('Topic created!')
+    # Create Kafka producer
+    
     print("producer created")
     
     while True:
+        
+        print('Sensor OK!')
         
         # Read DHT11 sensor data
         humidity, temperature = read_dht11_sensor()
