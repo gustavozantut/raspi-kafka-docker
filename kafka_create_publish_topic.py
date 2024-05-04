@@ -48,6 +48,7 @@ def create_kafka_topic():
     admin_client.create_topics([new_topic])
 
 print('Creating topic...')
+create_kafka_topic()
 while not create_kafka_topic():
     
         pass
@@ -61,17 +62,14 @@ while not read_dht11_sensor():
 
 try:
     
-    print('Creating topic...')
+    print('Creating producer...')
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
     while not producer():
 
             producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
             pass
             
-    print('Topic created!')
-    # Create Kafka producer
-    
-    print("producer created")
+    print('Producer created!')
     
     while True:
         
