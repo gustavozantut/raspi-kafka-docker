@@ -49,9 +49,9 @@ def create_kafka_topic():
 
 print('Creating topic...')
 create_kafka_topic()
-while not create_kafka_topic():
-    
-        pass
+#while not create_kafka_topic():
+#    
+#        pass
         
 print('Topic created!')
 
