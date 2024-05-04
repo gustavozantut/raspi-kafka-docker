@@ -49,10 +49,6 @@ def create_kafka_topic():
 
 print('Creating topic...')
 create_kafka_topic()
-#while not create_kafka_topic():
-#    
-#        pass
-        
 print('Topic created!')
 
 print('Reaching for sensor...')
@@ -64,11 +60,7 @@ try:
     
     print('Creating producer...')
     producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
-    while not producer():
 
-            producer = KafkaProducer(bootstrap_servers=bootstrap_servers, acks='all')
-            pass
-            
     print('Producer created!')
     
     while True:
